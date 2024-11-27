@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload - Amigos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Upload Memories</h1>
+    </header>
+    <form action="php/upload_handler.php" method="POST" enctype="multipart/form-data">
+        <label for="topic">Topic:</label>
+        <input type="text" id="topic" name="topic" required>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
+        <label for="occasion">Special Occasion:</label>
+        <input type="text" id="occasion" name="occasion">
+        <label for="photos">Upload Photos (Max: 50):</label>
+        <input type="file" id="photos" name="photos[]" multiple accept="image/*">
+        <label for="videos">Upload Videos (Max: 2):</label>
+        <input type="file" id="videos" name="videos[]" multiple accept="video/*">
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
