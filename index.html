@@ -11,8 +11,8 @@
         <h1>Amigos</h1>
         <nav>
             <a href="php/logout.php">Logout</a>
-            <button onclick="location.href='upload.html'">Upload Photos</button>
-            <button onclick="location.href='upload.html'">Upload Videos</button>
+            <button onclick="location.href='upload_photos.html'">Upload Photos</button>
+            <button onclick="location.href='upload_videos.html'">Upload Videos</button>
         </nav>
     </header>
     <div class="gallery">
@@ -20,24 +20,42 @@
         <!-- Dynamically populated gallery -->
         <?php
         $directory = 'uploads/';
-        $files = array_diff(scandir($directory), ['.', '..']);
-        foreach ($files as $file) {
-            $fileType = mime_content_type($directory . $file);
-            if (strpos($fileType, 'image') !== false) {
-                echo "<div class='gallery-item'><img src='$directory$file' alt='$file'><p>Uploaded by: <strong>Username</strong></p><p>Time: <strong>" . date('Y-m-d H:i') . "</strong></p></div>";
-            } elseif (strpos($fileType, 'video') !== false) {
-                echo "<div class='gallery-item'><video controls src='$directory$file'></video><p>Uploaded by: <strong>Username</strong></p><p>Time: <strong>" . date('Y-m-d H:i') . "</strong></p></div>";
+
+        // Check if the uploads directory exists
+        if (is_dir($directory)) {
+            $files = array_diff(scandir($directory), ['.', '..']);
+
+            if (count($files) > 0) {
+                foreach ($files as $file) {
+                    $filePath = $directory . $file;
+                    $fileExtension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+
+                    // Check if the file is an image
+                    if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif'])) {
+                        echo "
+                        <div class='gallery-item'>
+                            <img src='$filePath' alt='$file'>
+                            <p>Uploaded by: <strong>Username</strong></p>
+                            <p>Time: <strong>" . date('Y-m-d H:i', filemtime($filePath)) . "</strong></p>
+                        </div>";
+                    }
+                    // Check if the file is a video
+                    elseif (in_array($fileExtension, ['mp4', 'mov', 'avi', 'mkv'])) {
+                        echo "
+                        <div class='gallery-item'>
+                            <video controls src='$filePath'></video>
+                            <p>Uploaded by: <strong>Username</strong></p>
+                            <p>Time: <strong>" . date('Y-m-d H:i', filemtime($filePath)) . "</strong></p>
+                        </div>";
+                    }
+                }
+            } else {
+                echo "<p>No files uploaded yet. Start uploading to share memories!</p>";
             }
+        } else {
+            echo "<p>Uploads directory not found. Please create a directory named 'uploads' in the project folder.</p>";
         }
         ?>
-        <?php
-$directory = 'uploads/';
-$files = array_diff(scandir($directory), ['.', '..']);
-foreach ($files as $file) {
-    echo "Found file: $file<br>"; // Debugging output
-}
-?>
-
     </div>
 </body>
 </html>
