@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background: #4CAF50;
+    padding: 1em 0;
+    text-align: center;
+    color: white;
+}
+
+nav button {
+    margin: 0 1em;
+    padding: 0.5em 1em;
+    background: white;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+    cursor: pointer;
+}
+
+.login-container, form {
+    margin: 2em auto;
+    width: 50%;
+    padding: 2em;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.gallery {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1em;
+}
+
+.gallery-item img, video {
+    max-width: 100%;
+    border: 1px solid #ccc;
+    margin-bottom: 0.5em;
+}
