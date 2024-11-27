@@ -29,6 +29,14 @@
             }
         }
         ?>
+        <?php
+$directory = 'uploads/';
+$files = array_diff(scandir($directory), ['.', '..']);
+foreach ($files as $file) {
+    echo "Found file: $file<br>"; // Debugging output
+}
+?>
+
     </div>
 </body>
 </html>
